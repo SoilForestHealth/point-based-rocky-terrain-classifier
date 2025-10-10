@@ -5,6 +5,7 @@ plots/
 documents/
 __pycache__/
 rough.ipynb
+rough copy.ipynb
 
 *.pdf
 *.docx
