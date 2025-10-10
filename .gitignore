@@ -1,6 +1,6 @@
 # Ignore macOS system files
 .DS_Store
-data/
+plots/
 *.ipynb_checkpoints
 documents/
 __pycache__/
@@ -10,3 +10,5 @@ rough.ipynb
 *.docx
 *.pptx
 *.doc
+*.csv
+*.xlsx
