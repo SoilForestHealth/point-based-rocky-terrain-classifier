@@ -138,4 +138,7 @@ class Preprocessor:
             X_train, y_train = self.__encode_labels(X_train, y_train)
             X_test, y_test = self.__encode_labels(X_test, y_test)
 
+        X_train.drop("depth_encoded", axis=1, inplace=True)
+        X_test.drop("depth_encoded", axis=1, inplace=True)
+
         return X_train, y_train, X_test, y_test
