@@ -1,6 +1,7 @@
 # Ignore macOS system files
 .DS_Store
 plots/
+wandb/
 *.ipynb_checkpoints
 documents/
 __pycache__/
