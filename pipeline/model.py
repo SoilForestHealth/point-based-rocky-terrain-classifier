@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 import json
+import pickle as pkl
 
 # modules for model building
 from sklearn.model_selection import train_test_split
@@ -20,7 +21,13 @@ from sklearn.metrics import (
 # modules for abstract class
 from abc import ABC, abstractmethod
 
+
 # modules for hyperparameter tuning
+import os
+os.environ["WANDB_SILENT"] = "true"
+os.environ["WANDB_CONSOLE"] = "off"
+os.environ["WANDB_DISABLE_CODE"] = "true"
+os.environ["WANDB_DISABLE_LOG"] = "true"
 import wandb
 
 class Model(ABC):
@@ -28,6 +35,7 @@ class Model(ABC):
         self.model_name = model_name
         self.model = model
         self.selected_features = None
+        self.running_mx_recall = -1
 
     def train(self, X_train, y_train):
         self.model.fit(X_train, y_train)
@@ -47,8 +55,6 @@ class Model(ABC):
 
                 params["class_weight"] = class_weight
 
-            print(f"Training with config: {params}")
-
             # Set params for the model
             self.model.set_params(**params)
 
@@ -57,6 +63,7 @@ class Model(ABC):
 
             # Store metrics across folds
             precisions, recalls, f2_scores, aucs, pr_aucs = [], [], [], [], []
+            save_artifact = False
 
             for train_idx, val_idx in skf.split(self.X_train, self.y_train):
                 X_tr, X_val = self.X_train.iloc[train_idx], self.X_train.iloc[val_idx]
@@ -73,6 +80,7 @@ class Model(ABC):
                 f2_scores.append(fbeta_score(y_val, y_pred, average="macro", beta=2, zero_division=0))
                 aucs.append(roc_auc_score(y_val, y_proba))
                 pr_aucs.append(average_precision_score(y_val, y_proba))
+            
 
             # Compute mean & std for all metrics
             results = {
@@ -90,6 +98,19 @@ class Model(ABC):
 
             run.log(results)
 
+            if results["macro_recall_mean"] > self.running_mx_recall:
+                self.running_mx_recall = results["macro_recall_mean"]
+                save_artifact = True
+
+            if save_artifact:
+                model_filename = f"{self.model_name}.pkl"
+                with open(model_filename, "wb") as f:
+                    pkl.dump(self.model, f)
+
+                artifact = wandb.Artifact(f"{self.model_name}-model", type="model")
+                artifact.add_file(model_filename)
+                run.log_artifact(artifact)
+
     def tune(self, X_train, X_test, y_train, y_test, sweep_config: dict, project_name):
         
         # Save references for sweep
@@ -102,3 +123,4 @@ class Model(ABC):
         # Initialize and run sweep
         sweep_id = wandb.sweep(sweep_config, project=project_name)
         wandb.agent(sweep_id, function=self.train_sweep, count=sweep_config.get("count", 50))
+        return sweep_id
