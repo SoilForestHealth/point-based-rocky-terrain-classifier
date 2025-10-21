@@ -1,0 +1,22 @@
+{
+    "task": "binary_classification",
+    "name": "Rocky Terrain Prediction",
+    "description": "Predict whether a terrain is rocky or non-rocky based on various geological features.",
+    "labels": [0, 1],
+    "labels_mapping": {
+        "0": "Non-rocky",
+        "1": "Rocky"
+    },
+    "models": [
+        "logistic-regression",
+        "decision-tree",
+        "extra-trees",
+        "random-forest",
+        "gradient-boosting"
+    ],
+    "metrics": [
+        "macro-avg-recall",
+        "macro-avg-f2",
+        "avg-precision"
+    ]
+}

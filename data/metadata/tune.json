@@ -1,0 +1,73 @@
+{
+  "param_grid": {
+    "logistic-regression": {
+      "method": "bayes",
+      "metric": { "name": "macro_recall_mean", "goal": "maximize" },
+      "parameters": {
+        "C": { "min": 0.1, "max": 10.0 },
+        "solver": { "values": ["liblinear", "saga"] },
+        "class_weight": { "values": ["0.5_0.5", "0.45_0.55", "0.4_0.6"] },
+        "max_iter": { "value": 1000 },
+        "penalty": { "value": "l1" },
+        "random_state": { "value": 42 }
+      }
+    },
+    "decision-tree": {
+      "method": "bayes",
+      "metric": { "name": "macro_recall_mean", "goal": "maximize" },
+      "parameters": {
+        "criterion": { "values": ["gini", "entropy", "log_loss"] },
+        "max_depth": { "min": 1, "max": 20 },
+        "min_samples_split": { "min": 2, "max": 10 },
+        "min_samples_leaf": { "min": 1, "max": 10 },
+        "class_weight": { "values": ["0.5_0.5", "0.45_0.55", "0.4_0.6"] },
+        "random_state": { "value": 42 }
+      }
+    },
+    "random-forest": {
+      "method": "bayes",
+      "metric": { "name": "macro_recall_mean", "goal": "maximize" },
+      "parameters": {
+        "n_estimators": { "values": [100, 200, 500] },
+        "max_features": { "values": ["sqrt", "log2", 0.5] },
+        "criterion": { "values": ["gini", "entropy", "log_loss"] },
+        "max_depth": { "values": [5, 10, 15, 20] },
+        "min_samples_split": { "values": [2, 5, 10] },
+        "min_samples_leaf": { "values": [1, 5, 10] },
+        "class_weight": { "values": ["0.5_0.5", "0.45_0.55", "0.4_0.6"] },
+        "random_state": { "value": 42 },
+        "bootstrap": { "value": true }
+      }
+    },
+    "extra-trees": {
+      "method": "bayes",
+      "metric": { "name": "macro_recall_mean", "goal": "maximize" },
+      "parameters": {
+        "n_estimators": { "min": 50, "max": 500 },
+        "criterion": { "values": ["gini", "entropy", "log_loss"] },
+        "max_depth": { "min": 5, "max": 30 },
+        "min_samples_split": { "min": 2, "max": 20 },
+        "min_samples_leaf": { "min": 1, "max": 20 },
+        "max_features": { "values": ["sqrt", "log2"] },
+        "class_weight": { "values": ["0.5_0.5", "0.45_0.55", "0.4_0.6"] },
+        "bootstrap": { "values": [true, false] },
+        "random_state": { "value": 42 }
+      }
+    },
+    "gradient-boosting": {
+      "method": "bayes",
+      "metric": { "name": "macro_recall_mean", "goal": "maximize" },
+      "parameters": {
+        "n_estimators": { "min": 50, "max": 500 },
+        "learning_rate": { "min": 0.01, "max": 0.3 },
+        "criterion": { "values": ["friedman_mse", "squared_error"] },
+        "max_depth": { "min": 3, "max": 10 },
+        "min_samples_split": { "min": 2, "max": 20 },
+        "min_samples_leaf": { "min": 1, "max": 20 },
+        "subsample": { "min": 0.6, "max": 1.0 },
+        "max_features": { "values": ["sqrt", "log2"] },
+        "random_state": { "value": 42 }
+      }
+    }
+  }
+}
