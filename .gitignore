@@ -1,12 +1,12 @@
 # Ignore macOS system files
 .DS_Store
 plots/
+models/
 wandb/
 *.ipynb_checkpoints
 documents/
 __pycache__/
-rough.ipynb
-rough copy.ipynb
+*.ipynb
 .env
 
 *.pdf
@@ -15,3 +15,4 @@ rough copy.ipynb
 *.doc
 *.csv
 *.xlsx
+*.pkl
