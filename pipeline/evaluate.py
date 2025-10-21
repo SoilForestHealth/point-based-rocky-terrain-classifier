@@ -1,13 +1,6 @@
 # modules for data preprocessing
 import pandas as pd
 import numpy as np
-import json
-
-# modules for model building
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
 
 # modules for cross-validation and metrics
 from sklearn.model_selection import StratifiedKFold
