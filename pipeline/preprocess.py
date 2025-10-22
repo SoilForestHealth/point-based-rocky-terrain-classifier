@@ -110,6 +110,9 @@ class Preprocessor:
         df = self.__add_target_column(df)
         df = self.__perform_quality_check(df)
 
+        spatial_info = ["ID", "depth"]
+        idx_spatial_mapping = df[spatial_info].reset_index(drop = False, inplace = False)
+
         correlated_features = ["roughness", "profile_curvature", 
                                "bd2", "NDWI_mean_year2024",
                                "elevation", "sand2", "clay2"]
@@ -138,7 +141,7 @@ class Preprocessor:
             X_train, y_train = self.__encode_labels(X_train, y_train)
             X_test, y_test = self.__encode_labels(X_test, y_test)
 
-        X_train.drop("depth_encoded", axis=1, inplace=True)
-        X_test.drop("depth_encoded", axis=1, inplace=True)
+            X_train.drop("depth_encoded", axis=1, inplace=True)
+            X_test.drop("depth_encoded", axis=1, inplace=True)
 
-        return X_train, y_train, X_test, y_test
+        return X_train, y_train, X_test, y_test, idx_spatial_mapping
