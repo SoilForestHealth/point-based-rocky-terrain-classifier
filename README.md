@@ -60,9 +60,9 @@ To evaluate the models for the imbalanced binary classification problem, we use 
 
 <div align="center">
 
-$f2\_score = \frac{5 \cdot P \cdot R}{4 \cdot P + R}$
+$f2\\\_score = \frac{5 \cdot P \cdot R}{4 \cdot P + R}$
 
-$macro\_avg\_recall = \frac{1}{2} \sum_{i=1}^{2} R_i$
+$macro\\\_avg\\\_recall = \frac{1}{2} \sum_{i=1}^{2} R_i$
 
 
 | Model    | macro_avg_recall    |  f2_score  |  wandb sweeps  |
