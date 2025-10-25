@@ -69,8 +69,10 @@ $macro\_avg\_recall = \frac{1}{2} \sum_{i=1}^{2} R_i$
 |:--------------|:--------------:|:--------------:|:--------------:|
 | Logistic Regression | 0.557 | 0.557 | [wandb](https://wandb.ai/gauravpendharkar/logistic-regression-tuning) |
 | Decision Tree | 0.654 | 0.658 | [wandb](https://wandb.ai/gauravpendharkar/decision-tree-tuning) |
-| Random Forest | 0.723 | 0.731 | [wandb](https://wandb.ai/gauravpendharkar/random-forest-tuning) |
+| **Random Forest** | **0.723**| **0.731** | [wandb](https://wandb.ai/gauravpendharkar/random-forest-tuning) |
 | Extra Trees | 0.696 | 0.700 | [wandb](https://wandb.ai/gauravpendharkar/extra-trees-tuning) |
 | Gradient Boosting Trees | 0.724 | 0.724 | [wandb](https://wandb.ai/gauravpendharkar/gradient-boosting-trees-tuning) |
 
 </div>
+
+The overall model comparison dashboard is [here](https://wandb.ai/gauravpendharkar/model-comparison).
