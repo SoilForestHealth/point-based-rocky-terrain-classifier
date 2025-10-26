@@ -1,5 +1,5 @@
 <div align="center">
-<h1>Rocky Terrain Prediction</h1>
+<h1>Point-based Rocky Terrain Prediction</h1>
 </div>
 
 ## Aim
@@ -9,6 +9,8 @@ To predict the presence of rocky terrain using topography and remote sensing dat
 1. Topography Features (aspect, elevation, flow length, plan curvature, profile curvature, slope, tan curvature, twi)
 
 2. Remote Sensing Features (vegetation index, moisture index, bulk density, soil organic carbon, clay, sand)
+
+<ins>**Note**:</ins> Every coordinate is considered in isolation and hence this model follows a point-based approach.
 
 ## Environment Setup
 
